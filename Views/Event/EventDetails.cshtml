@@ -1,0 +1,42 @@
+﻿@using Evento.Models;
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Détail de l’évènement @ViewData["Name"]</title>
+
+</head>
+
+<body class="container">
+    <h1>Détail de l’évènement</h1>
+    <div>
+        <h2>@ViewData["Name"]</h2>
+        <p>@ViewData["Description"]</p>
+        <p>Date de début : @ViewData["StartDate"]</p>
+        <p>Date de fin : @ViewData["EndDate"]</p>
+        <p>Prix d’un ticket : @ViewData["Price"] €</p>
+        <p>Nombre de places restant : @ViewData["NumberOfTicketsToSold"]</p>
+        <p>Lieu : @ViewData["VenueName"]</p>
+        <address>
+            adresse : <br/>
+			@ViewData["VenueStreetNumber"] @ViewData["VenueStreetName"] <br />
+			@ViewData["VenueZipCode"] @ViewData["VenueCity"] <br />
+			@ViewData["VenueCountry"]
+        </address>
+        <p>Association organisatrice : @Html.ActionLink(Convert.ToString(ViewData["AssociationName"]), "AssociationDetails", "Association", new { id = @ViewData["AssociationId"] }, null)</p>
+
+    </div>
+    <p>
+        @Html.ActionLink("Liste des évènements", "EventsList", "Event")
+    </p>
+
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+﻿@using Evento.Models;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Détail de l’association @ViewData["Name"]</title>
+
+</head>
+
+<body class="container">
+    <h1>Détail de l’association</h1>
+    <div>
+        <h2>@ViewData["Name"]</h2>
+        <p>@ViewData["Description"]</p>
+        <p>Siret : @ViewData["Siret"]</p>
+    </div>
+    
+	<h2>Evènements organisés par l’association :</h2>
+    <ul>
+    @foreach (Event e in ViewData["Events"] as List<Event>)
+    {
+			<li>
+				@Html.ActionLink(@e.Name, "EventDetails", "Event", new { id = e.Id }, null)
+			</li>
+    }
+    </ul>
+    <p>
+        @Html.ActionLink("Voir la liste des associations", "AssociationsList", "Association")
+    </p>
+</body>
+
+</html>
