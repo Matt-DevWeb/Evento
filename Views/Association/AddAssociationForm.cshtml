@@ -1,0 +1,26 @@
+﻿@model Evento.ViewModels.AddAssociationFormViewModel
+
+@{
+    Layout = "_layout";
+	ViewBag.Title = "Ajouter une association";
+}
+
+	<h1>Ajouter une association</h1>
+	
+    @using (Html.BeginForm("AddAssociationForm", "Association", FormMethod.Post))
+    {
+		<div class="mb-3">
+			@Html.LabelFor(m => m.Association.Name, "Nom de l’association", new { @class = "form-label" })
+			@Html.TextBoxFor(m => m.Association.Name, new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Association.Description, "Description de l’association", new {@class = "form-label"})
+            @Html.TextAreaFor(m => m.Association.Description, new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Association.Siret, "Numéro siret de l’association", new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Association.Siret, new { @class = "form-control" })
+        </div>
+		<button type="submit" class="btn btn-primary">Ajouter</button>
+    }
+

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Evento.Models;
+using System.Collections.Generic;
+using Evento.ViewModels;
 
 namespace TPappMVC.Controllers
 {
@@ -7,39 +9,59 @@ namespace TPappMVC.Controllers
     {
         public IActionResult EventsList()
         {
-            ViewData["PastEvents"] = Events.GetEvents().Where(e => e.StartDate < DateTime.Now).ToList();
-            ViewData["FutureEvents"] = Events.GetEvents().Where(e => e.StartDate > DateTime.Now).ToList();
-            return View();
+            List<Event> pastEvents = Events.GetEvents().Where(e => e.StartDate < DateTime.Now).ToList();
+            List<Event> futureEvents = Events.GetEvents().Where(e => e.StartDate > DateTime.Now).ToList();
+
+            EventsListViewModel eventsListViewModel = new EventsListViewModel
+            {
+                PastEvents = pastEvents,
+                FutureEvents = futureEvents
+            };
+                return View(eventsListViewModel);
         }
 
        
 
         public IActionResult EventDetails(int id)
         {
-            Event myEvent = Events.GetEvents().FirstOrDefault(e => e.Id == id);
-            Association myAssociation = Associations.GetAssociations().FirstOrDefault(a => a.Id == myEvent.AssociationId);
-            Venue myVenue = Venues.GetVenues().FirstOrDefault(v => v.Id == myEvent.VenueId);
-            if (myEvent == null)
+            
+            Event eventt = Events.GetEvents().FirstOrDefault(e => e.Id == id);
+            Association association = Associations.GetAssociations().FirstOrDefault(a => a.Id == eventt.AssociationId);
+            Venue venue = Venues.GetVenues().FirstOrDefault(v => v.Id == eventt.VenueId);
+
+            EventDetailsViewModel eventDetailsViewModel = new EventDetailsViewModel
+            {
+                Eventt = eventt,
+                Association = association,
+                Venue = venue
+
+            };
+            if (eventt == null)
             {
                 return View("EventNotFound");
             }
-            ViewData["Name"] = myEvent.Name;
-            ViewData["Description"] = myEvent.Description;
-            ViewData["StartDate"] = myEvent.StartDate;
-            ViewData["EndDate"] = myEvent.EndDate;
-            ViewData["Price"] = myEvent.Price;
-            ViewData["Capacity"] = myVenue.Capacity;
-            ViewData["NumberOfTicketsToSold"] = myVenue.Capacity - myEvent.NumberOfTicketsSold;
-            ViewData["Photo"] = myEvent.Photo;
-            ViewData["AssociationId"] = myEvent.AssociationId;
-            ViewData["AssociationName"] = myAssociation.Name;
-            ViewData["VenueName"] = myVenue.Name;
-            ViewData["VenueStreetNumber"] = myVenue.StreetNumber;
-            ViewData["VenueStreetName"] = myVenue.StreetName;
-            ViewData["VenueCity"] = myVenue.City;
-            ViewData["VenueZipCode"] = myVenue.ZipCode;
+            ViewData["NumberOfTicketsToSold"] = venue.Capacity - eventt.NumberOfTicketsSold;
 
-            return View();
+            return View(eventDetailsViewModel);
+        }
+
+        public IActionResult UpdateEvent(int id)
+        {
+            if (id != 0)
+            {
+                using (IDal dal = new Dal())
+                {
+                    Event eventt = dal.GetEventById(id);
+                    if (eventt == null)
+                    {
+                        return View("EventNotFound");
+                    }
+                    return View(eventt);
+                    
+                    
+                }
+            }
+            return View("Error");
         }
     }
 

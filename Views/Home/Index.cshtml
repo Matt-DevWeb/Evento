@@ -1,0 +1,19 @@
+﻿@model Evento.ViewModels.HomeViewModel
+@{
+	Layout = "_layout";
+	ViewBag.Title = "Index";
+}
+
+		<div>
+			<h1>@Model.Title</h1>
+			<h2>@Model.Message</h2>
+			<p>@Model.Date.ToString("dd/MM/yyyy")</p>
+			<h3>Prochain évènement :</h3>
+			<p>@Model.Eventt.Name</p>
+			<p>@Model.Eventt.Description</p>
+			<p>@Model.Eventt.Price €</p>
+			<p>le @Model.Eventt.StartDate.ToString("dd/MM/yyyy")</p>
+			<br />
+			@Html.Partial("LoginForm")
+		</div>
+

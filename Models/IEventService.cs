@@ -1,12 +1,7 @@
 ﻿namespace Evento.Models
 {
-    // IDisposable nettoie l’interface quand plus besoin
-    public interface IDal :IDisposable
+    public interface IEventService : IDisposable
     {
-        public void DeleteCreateDatabase();
-
-      //public void InitializeDatabase();
-
         public List<Event> GetAllEvents();
 
         public int AddEvent(string name, string description, DateTime startDate, DateTime endDate, float price, int numberOfTickets, string photo, int associationId, int venueId);
@@ -15,10 +10,8 @@
 
         public void DeleteEvent(int id);
 
-        public Event GetEventById(int id);
+        // public Event GetEventById(int id);
 
         public Event GetEventByName(string name);
-
-        public List<Association> GetAllAssociations();
     }
 }

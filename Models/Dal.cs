@@ -1,5 +1,7 @@
 ﻿
 
+using System.Xml.Linq;
+
 namespace Evento.Models
 {
     public class Dal : IDal
@@ -16,6 +18,14 @@ namespace Evento.Models
             _bddContext.Database.EnsureDeleted();
             _bddContext.Database.EnsureCreated();
         }
+
+       /* public void InitializeDatabase()
+        {
+           AddEvent("Soirée Halloween", "Soirée déguisée", new DateTime(2021, 10, 31), new DateTime(2021, 10, 31), 10, 100, "halloween.jpg", 1, 2);
+           AddEvent("Concert de Rock", "Un concert de rock incroyable.", new DateTime(2023, 11, 1), new DateTime(2023, 11, 1), 50.0f, 200, "rock_concert.jpg", 1, 3);
+
+           UpdateEvent(1, "Soirée Halloween", "Soirée déguisée de ouf", new DateTime(2021, 10, 31), new DateTime(2021, 10, 31), 10, 100, "halloween.jpg", 1, 2);
+        }*/
 
         public void Dispose()
         {
@@ -72,12 +82,18 @@ namespace Evento.Models
 
         public Event GetEventById(int id)
         {
-            throw new NotImplementedException();
+            // return _bddContext.Events.Find(id);
+            return GetAllEvents().FirstOrDefault(e => (e.Id == id));
         }
 
         public Event GetEventByName(string name)
         {
             return GetAllEvents().FirstOrDefault(e => (e.Name == name));
+        }
+
+        public List<Association> GetAllAssociations()
+        {
+            return _bddContext.Associations.ToList();
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evento", "Evento.csproj", "{D3625D6B-50A5-484A-8184-7EBA1B0BB1E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestApp", "..\XUnitTestApp\XUnitTestApp.csproj", "{53DD6854-B568-467E-9B40-38AC17B46ABD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D3625D6B-50A5-484A-8184-7EBA1B0BB1E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3625D6B-50A5-484A-8184-7EBA1B0BB1E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3625D6B-50A5-484A-8184-7EBA1B0BB1E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53DD6854-B568-467E-9B40-38AC17B46ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53DD6854-B568-467E-9B40-38AC17B46ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53DD6854-B568-467E-9B40-38AC17B46ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53DD6854-B568-467E-9B40-38AC17B46ABD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

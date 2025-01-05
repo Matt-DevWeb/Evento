@@ -1,42 +1,28 @@
-﻿@using Evento.Models;
+﻿@model Evento.ViewModels.EventDetailsViewModel
+@using Evento.Models;
 @{
-	Layout = null;
+    Layout = "_layout";
+    ViewBag.Title = "Détail de l’évènement";
 }
-<!DOCTYPE html>
-
-<html>
-
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Détail de l’évènement @ViewData["Name"]</title>
-
-</head>
-
-<body class="container">
     <h1>Détail de l’évènement</h1>
     <div>
-        <h2>@ViewData["Name"]</h2>
-        <p>@ViewData["Description"]</p>
-        <p>Date de début : @ViewData["StartDate"]</p>
-        <p>Date de fin : @ViewData["EndDate"]</p>
-        <p>Prix d’un ticket : @ViewData["Price"] €</p>
+        <h2>@Model.Eventt.Name</h2>
+        <p>@Model.Eventt.Description</p>
+        <p>Date de début : @Model.Eventt.StartDate.ToString("dd/MM/yyyy")</p>
+        <p>Date de fin : @Model.Eventt.EndDate.ToString("dd/MM/yyyy")</p>
+        <p>Prix d’un ticket : @Model.Eventt.Price €</p>
         <p>Nombre de places restant : @ViewData["NumberOfTicketsToSold"]</p>
-        <p>Lieu : @ViewData["VenueName"]</p>
+        <p>Lieu : @Model.Venue.Name</p>
         <address>
             adresse : <br/>
-			@ViewData["VenueStreetNumber"] @ViewData["VenueStreetName"] <br />
-			@ViewData["VenueZipCode"] @ViewData["VenueCity"] <br />
-			@ViewData["VenueCountry"]
+            @Model.Venue.StreetNumber @Model.Venue.StreetName <br />
+            @Model.Venue.ZipCode @Model.Venue.City <br />
+            @Model.Venue.Country
         </address>
-        <p>Association organisatrice : @Html.ActionLink(Convert.ToString(ViewData["AssociationName"]), "AssociationDetails", "Association", new { id = @ViewData["AssociationId"] }, null)</p>
+        <p>Association organisatrice : @Html.ActionLink(Convert.ToString(@Model.Association.Name), "AssociationDetails", "Association", new { id = @Model.Association.Id }, null)</p>
 
     </div>
     <p>
         @Html.ActionLink("Liste des évènements", "EventsList", "Event")
     </p>
 
-
-</body>
-
-</html>

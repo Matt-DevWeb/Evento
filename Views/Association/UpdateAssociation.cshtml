@@ -1,0 +1,21 @@
+﻿@model Evento.Models.Association
+
+@{
+    Layout = "_layout";
+    ViewBag.Title = "Modifier une association";
+}
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Modifier une association : </legend>
+            @Html.LabelFor(m => Model.Name)
+            @Html.TextBoxFor(m => Model.Name)
+            @Html.ValidationMessageFor(m => Model.Name)
+            <br />
+            @Html.LabelFor(m => Model.Siret)
+            @Html.TextBoxFor(m => Model.Siret)
+            @Html.ValidationMessageFor(m => Model.Siret)
+            <br />
+            <input type="submit" value="Modifier" />
+        </fieldset>
+    }
